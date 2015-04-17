@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
-@Table(catalog = "test", schema = "",name="users")
+@Table(catalog = "ExamModuleDB", schema = "",name="users")
 @XmlRootElement
 public class UserDTO implements Serializable 
 {
@@ -31,10 +31,6 @@ public class UserDTO implements Serializable
     private String name;
         
     @Basic(optional = false)
-    @Column(nullable = false, length = 10,name="asuid")
-    private String asuid;
-    
-    @Basic(optional = false)
     @Column(nullable = false, length = 32,name="passkey")
     private String password;
     
@@ -43,7 +39,9 @@ public class UserDTO implements Serializable
     /**
 	 * Access level of the user. 
 	 * 1 = Admin user
-	 * 2 = Regular user
+	 * 2 = Regular user (Video)
+	 * 3 = Regular user (Image)
+	 * 4 = Regular user (Nothing)
 	 */
     public String getUserName() {
 		return userName;
@@ -56,12 +54,12 @@ public class UserDTO implements Serializable
     public UserDTO() {
     }
 
-    public UserDTO(String asuid) {
-        this.asuid = asuid;
+    public UserDTO(String userName) {
+        this.userName = userName;
     }
 
-    public UserDTO(String asuid, String name, String password) {
-        this.asuid = asuid;
+    public UserDTO(String userName, String name, String password) {
+        this.userName = userName;
         this.name = name;
         this.password = password;
     }
@@ -72,14 +70,6 @@ public class UserDTO implements Serializable
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getAsuid() {
-        return asuid;
-    }
-
-    public void setAsuid(String asuid) {
-        this.asuid = asuid;
     }
 
     public String getPassword() {
@@ -93,7 +83,7 @@ public class UserDTO implements Serializable
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (asuid != null ? asuid.hashCode() : 0);
+        hash += (userName != null ? userName.hashCode() : 0);
         return hash;
     }
 
@@ -104,7 +94,7 @@ public class UserDTO implements Serializable
             return false;
         }
         UserDTO other = (UserDTO) object;
-        if ((this.asuid == null && other.asuid != null) || (this.asuid != null && !this.asuid.equals(other.asuid))) {
+        if ((this.userName == null && other.userName != null) || (this.userName != null && !this.userName.equals(other.userName))) {
             return false;
         }
         return true;
@@ -112,7 +102,7 @@ public class UserDTO implements Serializable
 
     @Override
     public String toString() {
-        return "Test_QB_ORM.Students[ asuid=" + asuid + " ]";
+        return "Test_QB_ORM.Students[ userName=" + userName + " ]";
     }
 
 	public String getAccess() {

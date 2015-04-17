@@ -37,7 +37,7 @@ public String determineDefaultTargetUrl() {
         if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
             isAdmin = true;
             break;
-        } else if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
+        } else if (grantedAuthority.getAuthority().equals("ROLE_USER_VIDEO") || grantedAuthority.getAuthority().equals("ROLE_USER_IMAGE") || grantedAuthority.getAuthority().equals("ROLE_USER_NOTHING")) {
             isUser = true;
             break;
         }

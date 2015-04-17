@@ -13,7 +13,7 @@
 	
 	<filter>
 		<filter-name>noCacheFilter</filter-name>
-		<filter-class>org.questionbank.handler.NoCacheFilter</filter-class>
+		<filter-class>org.exammodule.handler.NoCacheFilter</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>noCacheFilter</filter-name>

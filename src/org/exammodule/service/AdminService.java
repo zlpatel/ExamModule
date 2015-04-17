@@ -8,9 +8,4 @@ import org.exammodule.form.RegularQuestionsRecordFormBean;
 import org.exammodule.form.StudentsRecordFormBean;
 public interface AdminService {
 
-	List<StudentsRecordFormBean> getStudentsRecord() throws Exception;
-	String getStudentName(String userName) throws Exception;
-	List<CategoricalRecordFormBean> getCategoricalRecord(String userName) throws Exception;
-	List<RegularQuestionsRecordFormBean> getRegularQuestionsRecord(String userName) throws Exception;
-	List<AdditionalQuestionsRecordFormBean> getAdditionalQuestionsRecord(String userName) throws Exception;
-}
+	}

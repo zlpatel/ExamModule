@@ -10,6 +10,6 @@
     		p:prefix="/WEB-INF/jsp/" p:suffix=".jsp" />
 
 	<bean id="securityContextAccessor"
-    class="org.questionbank.serviceImpl.SecurityContextAccessorImpl" />
+    class="org.exammodule.serviceImpl.SecurityContextAccessorImpl" />
 	
 </beans>

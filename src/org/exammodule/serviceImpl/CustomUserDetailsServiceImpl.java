@@ -60,7 +60,13 @@ protected static Logger logger = Logger.getLogger("service");
 			userRole="ROLE_ADMIN";
 		}
 		else if(access.compareTo("2")==0){
-			userRole="ROLE_USER";
+			userRole="ROLE_USER_VIDEO";
+		}
+		else if(access.compareTo("3")==0){
+			userRole="ROLE_USER_IMAGE";
+		}
+		else if(access.compareTo("4")==0){
+			userRole="ROLE_USER_NOTHING";
 		}
 		// Build user's authorities
 			setAuths.add(new SimpleGrantedAuthority(userRole));

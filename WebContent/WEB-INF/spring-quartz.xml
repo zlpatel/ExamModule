@@ -3,17 +3,17 @@
  xsi:schemaLocation="http://www.springframework.org/schema/beans
  http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
- <bean id="myTask" class="org.questionbank.tasks.MyTask" />
+ <!-- <bean id="myTask" class="org.questionbank.tasks.MyTask" />
 
- <!-- specifying class and method that is going to be called on a specified 
-  time basis -->
+ specifying class and method that is going to be called on a specified 
+  time basis
  <bean id="myJob"
   class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
   <property name="targetObject" ref="myTask" />
   <property name="targetMethod" value="printCurrentTime" />
  </bean>
 
- <!-- simple trigger specify repeat interval and delay time -->
+ simple trigger specify repeat interval and delay time
  <bean id="simpleTrigger"
   class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
   <property name="jobDetail" ref="myJob" />
@@ -29,8 +29,8 @@
  
 	</bean>
 
- <!-- scheduler factory bean to bind,the executing code and time intervals 
-  together -->
+ scheduler factory bean to bind,the executing code and time intervals 
+  together
  <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
   <property name="jobDetails">
    <list>
@@ -43,5 +43,5 @@
    </list>
   </property>
  </bean>
-
+ -->
 </beans>

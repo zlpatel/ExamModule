@@ -14,7 +14,7 @@
 		<security:intercept-url pattern="/secure/admin/**" requires-channel="https"
 			access="hasRole('ROLE_ADMIN')" />
 		<security:intercept-url pattern="/secure/user/**" requires-channel="https"
-			access="hasRole('ROLE_USER')" />
+			access="hasAnyRole('ROLE_USER_VIDEO','ROLE_USER_IMAGE','ROLE_USER_NOTHING')" />
 
 		<security:form-login login-page="/secure/auth/login"
 			authentication-failure-url="/secure/auth/login?error=true"
@@ -50,7 +50,7 @@
 
 	<!-- The custom authentication success handler to redirect user's to user specific page instead of common page-->
 	<bean id="myAuthenticationSuccessHandler"
-        	class="org.questionbank.handler.UrlAuthenticationSuccessHandler" />
+        	class="org.exammodule.handler.UrlAuthenticationSuccessHandler" />
         	
 	<!-- Use a Md5 encoder since the user's passwords are stored as Md5 in the 
 		database -->
@@ -60,6 +60,6 @@
 
 	<!-- A custom service where Spring will retrieve users and their corresponding 
 		access levels -->
-	<bean id="customUserDetailsService" class="org.questionbank.serviceImpl.CustomUserDetailsServiceImpl" />
+	<bean id="customUserDetailsService" class="org.exammodule.serviceImpl.CustomUserDetailsServiceImpl" />
 
 </beans>

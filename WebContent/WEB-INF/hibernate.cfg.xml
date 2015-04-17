@@ -30,7 +30,7 @@
     	</property>
     	<property name="packagesToScan">
     		<list>
-    			<value>org.questionbank.dto</value>
+    			<value>org.exammodule.dto</value>
     		</list>
     	</property>
     </bean>
