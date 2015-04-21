@@ -128,6 +128,7 @@ public class QuestionServiceImpl implements QuestionService {
 		questionFormBean.setQuestionOrder(questionsDTO.getQuestionOrder());
 		questionFormBean.setQuestionId(questionsDTO.getQuestionId());
 		questionFormBean.setQuestionType(questionsDTO.getQuestionType());
+		questionFormBean.setQuestionImage(questionsDTO.getQuestionImage());
 		questionFormBean.setStartTime(new Date());
 		questionFormBean.setStatement(questionsDTO.getStatement());
 		wholeQuestion

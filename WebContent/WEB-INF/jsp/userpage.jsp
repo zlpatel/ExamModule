@@ -30,7 +30,7 @@
 </nav>
 <br>
 
-<a class="btn btn-info" href="question">Begin Test</a>
+<a class="btn btn-info" href="test">Begin Test</a>
 
 <c:url value="/j_spring_security_logout" var="logoutUrl" />
  

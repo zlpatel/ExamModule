@@ -20,8 +20,10 @@
 <!-- Latest compiled and minified JavaScript -->
 <script
 	src="${pageContext.request.contextPath}/externalresources/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript"
+	src="${pageContext.request.contextPath}/externalresources/timer/countdowntimer.js"></script>	
 </head>
-<body>
+<body onload="initializeExamTimer('${TIME}');">
 	<center>
 		<h1 class="bg-primary">MATHEMATICS TEST</h1>
 	</center>
@@ -35,6 +37,10 @@
 		<li><a href="javascript:formSubmit()">Logout</a></li>
 	</ul>
 	</nav>
+	<br>
+	<div>
+		<input type="text" id="time" readonly="true">
+	</div>
 	<br>
 	<c:url value="/j_spring_security_logout" var="logoutUrl" />
 	<!-- csrf for log out-->
@@ -51,7 +57,7 @@
 	<c:choose>
 		<c:when test="${not empty feedbackImageName}">
 			<h2>Below is the explained solution for the question.</h2>
-			<img alt="solution" src="${feedbackImageName}">
+			<img alt="solution" src="${pageContext.request.contextPath}/externalresources/image/${feedbackImageName}">
 		</c:when>
 	</c:choose>
 

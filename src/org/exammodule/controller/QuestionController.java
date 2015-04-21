@@ -1,17 +1,20 @@
 package org.exammodule.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.exammodule.form.QuestionFormBean;
+import org.exammodule.handler.Constants;
 import org.exammodule.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 @RequestMapping("/user")
@@ -24,7 +27,7 @@ public class QuestionController {
 	@RequestMapping(value = "/question", method = RequestMethod.GET)
 	public ModelAndView initForm(HttpSession session) {
 		logger.debug("Received request to show question page");
-
+		
 		String userName = (String) session.getAttribute("USERNAME");
 		Integer questionOrder = (Integer) session
 				.getAttribute("QUESTION_ORDER");
@@ -55,6 +58,14 @@ public class QuestionController {
 		String access = (String) session.getAttribute("ACCESS_LEVEL");
 		Integer questionOrder = (Integer) session
 				.getAttribute("QUESTION_ORDER");
+		
+		long testCurrentTime=new Date().getTime()/1000;
+		
+		long differenceTime=testCurrentTime-(long)session.getAttribute("TEST_START_TIME");
+		long remainingTime=Constants.TEST_TIME-differenceTime;
+		if (session != null) {
+            session.setAttribute("TIME", remainingTime);
+        }
 
 		if (access == "ROLE_USER_VIDEO") {
 			try {
@@ -97,17 +108,15 @@ public class QuestionController {
 	}
 
 	@RequestMapping(value = "/nextQuestion", method = RequestMethod.GET)
-	public String nextQuestion() {
+	public String nextQuestion(HttpSession session) {
 		logger.debug("Request for next question");
+		long testCurrentTime=new Date().getTime()/1000;
+		
+		long differenceTime=testCurrentTime-(long)session.getAttribute("TEST_START_TIME");
+		long remainingTime=Constants.TEST_TIME-differenceTime;
+		if (session != null) {
+            session.setAttribute("TIME", remainingTime);
+        }
 		return "redirect:../../question";
-	}
-
-	@RequestMapping(value = "/choice/{choice}", method = RequestMethod.GET)
-	public String moreQuestionChoice(@PathVariable boolean choice) {
-		logger.debug("Trying again or opting for more questions!");
-		if (choice)
-			return "redirect:../question";
-		else
-			return "userpage";
 	}
 }
