@@ -106,7 +106,7 @@ public class QuestionDAOImpl implements QuestionDAO
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AttemptsDTO> getQuestionsListForRightAttemptsRegularQuestions(
+	public List<AttemptsDTO> getQuestionsListForRightAttempts(
 			String userName, String questionType) throws Exception {
 		Query query = sessionFactory.getCurrentSession().createQuery("FROM AttemptsDTO r WHERE r.user.userName = :userName and r.question.questionType = :questionType and r.rightAttempt = :rightAttempt");
 		query.setString("userName", userName);
@@ -118,7 +118,7 @@ public class QuestionDAOImpl implements QuestionDAO
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<AttemptsDTO> getQuestionsListForWrongAttemptsAdditionalQuestions(
+	public List<AttemptsDTO> getQuestionsListForWrongAttempts(
 			String userName, String questionType) throws Exception {
 		Query query = sessionFactory.getCurrentSession().createQuery("FROM AttemptsDTO r WHERE r.user.userName = :userName and r.question.questionType = :questionType and r.wrongAttempt = :wrongAttempt");
 		query.setString("userName", userName);

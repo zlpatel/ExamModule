@@ -47,7 +47,7 @@
 					<th class="text-center">Student Name</th>
 					<th class="text-center">Right Attempts</th>
 					<th class="text-center">Wrong Attempts</th>
-					<th class="text-center" colspan="3">Action</th>
+					<th class="text-center" colspan="2">Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -56,7 +56,6 @@
 						<td class="text-center">${studentRecord.studentName}</td>
 						<td class="text-center">${studentRecord.rightAttemptCount}</td>
 						<td class="text-center">${studentRecord.wrongAttemptCount}</td>
-						<td class="text-center"><input style="width:100px;" name="Categorical" type="submit" value= "Categorical" title="category based questions details" class = "btn btn-info btn-xs" onclick="document.forms[0].method = 'post';document.forms[0].action = 'categoricalRecords/${studentRecord.userName}'; ;return true;"/></td>
 						<td class="text-center"><input style="width:100px;" name="RegularQuestions" type="submit" value= "Regular" title="regular questions details" class = "btn btn-info btn-xs" onclick="document.forms[0].method = 'post';document.forms[0].action = 'regularQuestionsRecords/${studentRecord.userName}'; ;return true;"/></td>
 						<td class="text-center"><input style="width:100px;" name="AdditionalQuestions" type="submit" value= "Additional" title="additional questions details" class = "btn btn-info btn-xs" onclick="document.forms[0].method = 'post';document.forms[0].action = 'additionalQuestionsRecords/${studentRecord.userName}'; ;return true;"/></td>
 					</tr>

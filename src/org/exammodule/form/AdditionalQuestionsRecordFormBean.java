@@ -5,7 +5,8 @@ import java.util.Date;
 public class AdditionalQuestionsRecordFormBean implements Comparable<AdditionalQuestionsRecordFormBean>{
 	private String questionName;
 	private String markedAnswer;
-	private Date dateTime;
+	private Date startTime;
+	private Date attemptTime;
 	private boolean result;
 	
 	public String getQuestionName() {
@@ -20,11 +21,17 @@ public class AdditionalQuestionsRecordFormBean implements Comparable<AdditionalQ
 	public void setMarkedAnswer(String markedAnswer) {
 		this.markedAnswer = markedAnswer;
 	}
-	public Date getDateTime() {
-		return dateTime;
+	public Date getStartTime() {
+		return startTime;
 	}
-	public void setDateTime(Date dateTime) {
-		this.dateTime = dateTime;
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+	public Date getAttemptTime() {
+		return attemptTime;
+	}
+	public void setAttemptTime(Date attemptTime) {
+		this.attemptTime = attemptTime;
 	}
 	public boolean isResult() {
 		return result;
@@ -35,7 +42,7 @@ public class AdditionalQuestionsRecordFormBean implements Comparable<AdditionalQ
 	
 	@Override
 	public int compareTo(AdditionalQuestionsRecordFormBean o1) {
-		return this.dateTime.compareTo(o1.dateTime);
+		return this.startTime.compareTo(o1.startTime);
     }
 	
 }
