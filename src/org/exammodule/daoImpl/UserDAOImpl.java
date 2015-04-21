@@ -37,7 +37,7 @@ public class UserDAOImpl implements UserDAO{
 
 		List<UserDTO> students = null;
 		logger.debug("Request to get all students");
-		students=sessionFactory.getCurrentSession().createCriteria(UserDTO.class).add(Restrictions.eq("access","2")).list();
+		students=sessionFactory.getCurrentSession().createCriteria(UserDTO.class).add(Restrictions.between("access","2","4")).list();
 		return students;
 	}
 
