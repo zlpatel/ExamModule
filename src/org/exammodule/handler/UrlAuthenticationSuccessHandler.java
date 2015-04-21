@@ -23,6 +23,8 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
     private UsernamePasswordAuthenticationFilter usernamePasswordAuthenticationFilter;
 	
 	public static final String USERNAME_KEY = "USERNAME";
+	public static final String ACCESS_LEVEL_KEY = "ACCESS_LEVEL";
+	public static final String QUESTION_ORDER_KEY = "QUESTION_ORDER";
 	
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
  
@@ -43,7 +45,9 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
  
     protected void handle(HttpServletRequest request,
       HttpServletResponse response, Authentication authentication) throws IOException {
-        String targetUrl = determineTargetUrl(authentication);
+        
+    	HttpSession session = request.getSession(false);
+    	String targetUrl = determineTargetUrl(session,authentication);
  
         if (response.isCommitted()) {
             logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
@@ -54,16 +58,37 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
     }
  
     /** Builds the target URL according to the logic defined in the main class Javadoc. */
-    protected String determineTargetUrl(Authentication authentication) {
+    protected String determineTargetUrl(HttpSession session, Authentication authentication) {
     	boolean isAdmin = false;
         boolean isUser = false;
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         for (GrantedAuthority grantedAuthority : authorities) {
             if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
                 isAdmin = true;
+                if (session != null) {
+                   session.setAttribute(ACCESS_LEVEL_KEY,"ROLE_ADMIN");
+                }
                 break;
-            } else if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
+            } else if (grantedAuthority.getAuthority().equals("ROLE_USER_VIDEO")){ 
                 isUser = true;
+                if (session != null) {
+                    session.setAttribute(ACCESS_LEVEL_KEY,"ROLE_USER_VIDEO");
+                    session.setAttribute(QUESTION_ORDER_KEY,1);
+                 }
+                break;
+            }else if(grantedAuthority.getAuthority().equals("ROLE_USER_IMAGE")){
+            	isUser = true;
+            	if (session != null) {
+                    session.setAttribute(ACCESS_LEVEL_KEY,"ROLE_USER_IMAGE");
+                    session.setAttribute(QUESTION_ORDER_KEY,1);
+                 }
+                break;
+            }else if(grantedAuthority.getAuthority().equals("ROLE_USER_NOTHING")){
+            	isUser = true;
+            	if (session != null) {
+                    session.setAttribute(ACCESS_LEVEL_KEY,"ROLE_USER_NOTHING");
+                    session.setAttribute(QUESTION_ORDER_KEY,1);
+                 }
                 break;
             }
         }

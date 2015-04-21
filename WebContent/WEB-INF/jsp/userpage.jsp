@@ -18,17 +18,19 @@
 	<script src="${pageContext.request.contextPath}/externalresources/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
-<center><h1 class="bg-primary"> QUESTION BANK </h1> </center>
+<center><h1 class="bg-primary">MATHEMATICS TEST</h1> </center>
 <center><h4>Hi! ${USERNAME}</h4></center>
 
 <nav class="navbar navbar-default navbar-static-top">
 <ul class="nav navbar-nav">
 <li class="active"><a href="#">Home</a></li>
-<li><a href="question">Solve Questions</a></li>
-<li><a href="javascript:formSubmit()">Logout</a> </li>
+<!-- <li><a href="question">Solve Questions</a></li>-->
+<li><a href="javascript:formSubmit()">Logout</a> </li> 
 </ul>
 </nav>
 <br>
+
+<a class="btn btn-info" href="question">Begin Test</a>
 
 <c:url value="/j_spring_security_logout" var="logoutUrl" />
  

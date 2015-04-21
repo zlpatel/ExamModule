@@ -25,7 +25,7 @@
 	
 </head>
 <body>
-<center><h1 class=" bg-primary"> QUESTION BANK </h1></center>
+<center><h1 class=" bg-primary"> MATHEMATICS TEST </h1></center>
 
 <%-- <div id="login-error">${error}</div> --%>
 

@@ -1,36 +1,44 @@
 package org.exammodule.form;
 
+import java.util.Date;
 import java.util.TreeMap;
 
 public class QuestionFormBean 
 {
-	private String questionId;
-	private String statement;
-	private int typeId;
+	private Integer questionOrder;
+	private Integer questionId;
+	private String questionType;
+	private Date startTime;
+	private String statement;	
 	private TreeMap<String,String> optionList;
+	private String wholeQuestion;
 	private String selectedOption;
 	private String message;
-	private String wholeQuestion;
-	private boolean correct;
-	private String videoLink;
-	
-	public String getVideoLink() {
-		return videoLink;
+	private String questionImage;
+		
+	public Integer getQuestionOrder() {
+		return questionOrder;
 	}
-	public void setVideoLink(String videoLink) {
-		this.videoLink = videoLink;
+	public void setQuestionOrder(Integer questionOrder) {
+		this.questionOrder = questionOrder;
 	}
-	public int getTypeId() {
-		return typeId;
+	public Integer getQuestionId() {
+		return questionId;
 	}
-	public void setTypeId(int type) {
-		this.typeId = type;
+	public void setQuestionId(Integer questionId) {
+		this.questionId = questionId;
 	}
-	public boolean isCorrect() {
-		return correct;
+	public String getQuestionType() {
+		return questionType;
 	}
-	public void setCorrect(boolean correct) {
-		this.correct = correct;
+	public void setQuestionType(String questionType) {
+		this.questionType = questionType;
+	}
+	public Date getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
 	}
 	public String getStatement() {
 		return statement;
@@ -38,29 +46,11 @@ public class QuestionFormBean
 	public void setStatement(String statement) {
 		this.statement = statement;
 	}
-	public String getSelectedOption() {
-		return selectedOption;
-	}
-	public void setSelectedOption(String selectedOption) {
-		this.selectedOption = selectedOption;
-	}
-	public String getQuestionId() {
-		return questionId;
-	}
-	public void setQuestionId(String questionId) {
-		this.questionId = questionId;
-	}
-	public TreeMap<String,String> getOptionList() {
+	public TreeMap<String, String> getOptionList() {
 		return optionList;
 	}
-	public void setOptionList(TreeMap<String,String> optionList) {
+	public void setOptionList(TreeMap<String, String> optionList) {
 		this.optionList = optionList;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
 	}
 	public String getWholeQuestion() {
 		return wholeQuestion;
@@ -68,5 +58,24 @@ public class QuestionFormBean
 	public void setWholeQuestion(String wholeQuestion) {
 		this.wholeQuestion = wholeQuestion;
 	}
+	public String getSelectedOption() {
+		return selectedOption;
+	}
+	public void setSelectedOption(String selectedOption) {
+		this.selectedOption = selectedOption;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public String getQuestionImage() {
+		return questionImage;
+	}
+	public void setQuestionImage(String questionImage) {
+		this.questionImage = questionImage;
+	}
+	
 	
 }

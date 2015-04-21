@@ -72,7 +72,7 @@ public class QuestionsDTO implements Serializable
     private String questionImage;
     
     @Column(name = "feedback_video_link", nullable = true)
-    private String videoLink;
+    private String feedbackVideoLink;
     
     @Column(name = "feedback_image", nullable = false)
     private String feedbackImage;
@@ -166,12 +166,12 @@ public class QuestionsDTO implements Serializable
 		this.questionImage = questionImage;
 	}
 
-	public String getVideoLink() {
-		return videoLink;
+	public String getFeedbackVideoLink() {
+		return feedbackVideoLink;
 	}
 
-	public void setVideoLink(String videoLink) {
-		this.videoLink = videoLink;
+	public void setFedbackVideoLink(String feedbackVideoLink) {
+		this.feedbackVideoLink = feedbackVideoLink;
 	}
 
 	public String getFeedbackImage() {

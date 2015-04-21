@@ -42,13 +42,12 @@
 
 </head>
 <body onload="convertFromLatexToMathML()">
-<center><h1 class="bg-primary"> QUESTION BANK </h1> </center>
+<center><h1 class="bg-primary"> MATHEMATICS TEST </h1> </center>
 <center><h4>Hi! ${USERNAME}</h4></center>
 
 <nav class="navbar navbar-default navbar-static-top">
 <ul class="nav navbar-nav">
-<li><a href="home">Home</a></li>
-<li class="active"><a href="#">Solve Questions</a></li>
+<li class="active"><a href="#">Test</a></li>
 <li><a href="javascript:formSubmit()">Logout</a> </li>
 </ul>
 </nav>
