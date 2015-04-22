@@ -7,13 +7,17 @@ CREATE TABLE users (
   userName varchar(10) NOT NULL,
   passkey varchar(32) NOT NULL,
   access varchar(10) NOT NULL,
+  account_not_blocked bool,
   PRIMARY KEY (userName)
 );
 
-insert into users values("Student4","1234567894","ee11cbb19052e40b07aac0ca060c23ee","4");
-insert into users values("Student3","1234567893","ee11cbb19052e40b07aac0ca060c23ee","3");
-insert into users values("Student2","1234567892","ee11cbb19052e40b07aac0ca060c23ee","2");
-insert into users values("Admin1","1234567891","ee11cbb19052e40b07aac0ca060c23ee","1");
+insert into users values("Student4","1234567894","ee11cbb19052e40b07aac0ca060c23ee","4",true);
+insert into users values("Student3","1234567893","ee11cbb19052e40b07aac0ca060c23ee","3",true);
+insert into users values("Student2","1234567892","ee11cbb19052e40b07aac0ca060c23ee","2",true);
+insert into users values("Admin1","1234567891","ee11cbb19052e40b07aac0ca060c23ee","1",true);
+
+delete from users;
+drop table users cascade;
 
 CREATE TABLE questions(
 	question_order int NOT NULL AUTO_INCREMENT,
@@ -32,6 +36,11 @@ CREATE TABLE questions(
 	PRIMARY KEY (question_order,question_id,question_type)
 );
 
+
+insert into questions(question_id,question_type,statement,option1,option2,option3,option4,option5,answer,question_image,feedback_video_link,feedback_image) values(1,"a","x^{2}+2xy+ y^{2} =25","x+y= \\pm 5","x-y=5","xy=5","x/y=5","x^{2}=5","x^{2}=5","DualGraph.jpg","https://miro.asu.edu/videos/online/MAT265-dheckman/MAT265-1-2_CompositeGraph_ex1_0232.mp4","DualGraph.jpg");
+insert into questions(question_id,question_type,statement,option1,option2,option3,option4,option5,answer,question_image) values(1,"b","x^{2}+2xy+ y^{2} =25","x+y= \\pm 5","x-y=5","xy=5","x/y=5","x^{2}=5","x^{2}=5","DualGraph.jpg");
+insert into questions(question_id,question_type,statement,option1,option2,option3,option4,option5,answer,question_image,feedback_video_link,feedback_image) values(2,"a","x^{2}+2xy+ y^{2} =25","x+y= \\pm 5","x-y=5","xy=5","x/y=5","x^{2}=5","x^{2}=5","DualGraph.jpg","https://miro.asu.edu/videos/online/MAT265-dheckman/MAT265-1-2_CompositeGraph_ex1_0232.mp4","DualGraph.jpg");
+insert into questions(question_id,question_type,statement,option1,option2,option3,option4,option5,answer,question_image) values(2,"b","x^{2}+2xy+ y^{2} =25","x+y= \\pm 5","x-y=5","xy=5","x/y=5","x^{2}=5","x^{2}=5","DualGraph.jpg");
 select * from questions;
 ALTER TABLE questions AUTO_INCREMENT=1;
 delete from questions;
