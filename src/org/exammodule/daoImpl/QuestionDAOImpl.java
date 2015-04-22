@@ -8,6 +8,7 @@ import org.exammodule.dao.QuestionDAO;
 import org.exammodule.dto.AttemptsDTO;
 import org.exammodule.dto.QuestionsDTO;
 import org.exammodule.dto.UserDTO;
+import org.exammodule.exception.AllQuestionsAnsweredException;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +23,19 @@ public class QuestionDAOImpl implements QuestionDAO
 
 	
 	@Override
-	public QuestionsDTO getThisQuestion(Integer questionOrder) throws Exception 
+	public QuestionsDTO getThisQuestion(Integer questionOrder) throws AllQuestionsAnsweredException,Exception 
 	{
 		logger.debug("Request to find a given question in QuestionDAO");
 		QuestionsDTO questionsDTO=new QuestionsDTO(); 
 		Query query = sessionFactory.getCurrentSession().createQuery("FROM QuestionsDTO q WHERE q.questionOrder = :questionOrder");
 		query.setInteger("questionOrder", questionOrder);
 		questionsDTO = (QuestionsDTO) query.uniqueResult();
-		return questionsDTO;
 		
+		if(questionsDTO==null){
+			throw new AllQuestionsAnsweredException("All Questions have been answered!");
+		}else{
+			return questionsDTO;
+		}
 	}
     
 	@Override

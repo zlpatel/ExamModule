@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.exammodule.exception.AllQuestionsAnsweredException;
 import org.exammodule.form.QuestionFormBean;
 import org.exammodule.handler.Constants;
 import org.exammodule.service.QuestionService;
@@ -33,13 +34,19 @@ public class QuestionController {
 				.getAttribute("QUESTION_ORDER");
 		logger.debug(userName + " User logged in");
 		QuestionFormBean question = null;
+		ModelAndView mav = new ModelAndView();
 		try {
 			question = questionService.getAQuestion(questionOrder);
-		} catch (Exception e) {
-			ModelAndView model = new ModelAndView("questionerr");
-			model.addObject("message",
+		} catch (AllQuestionsAnsweredException e) {
+			mav.setViewName("questionerr");
+			mav.addObject("message",
+					e.getMessage());
+			e.printStackTrace();
+		}catch (Exception e) {
+			mav.setViewName("questionerr");
+			mav.addObject("message",
 					"Something went wrong, please try again later!");
-			return model;
+			return mav;
 		}
 		ModelAndView model = new ModelAndView("questionpage");
 		model.addObject("optionList", question.getOptionList());
@@ -71,7 +78,7 @@ public class QuestionController {
 			try {
 				mav.addObject("feedbackVideoLink",questionService.getFeedbackVideoLink(question));
 				mav.setViewName("videofeedbackpage");
-			} catch (Exception e) {
+			}catch (Exception e) {
 				mav.setViewName("questionerr");
 				mav.addObject("message",
 						"Something went wrong, please try again later!");

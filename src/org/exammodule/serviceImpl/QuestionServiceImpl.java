@@ -8,6 +8,7 @@ import org.exammodule.dao.QuestionDAO;
 import org.exammodule.dao.UserDAO;
 import org.exammodule.dto.QuestionsDTO;
 import org.exammodule.dto.UserDTO;
+import org.exammodule.exception.AllQuestionsAnsweredException;
 import org.exammodule.form.QuestionFormBean;
 import org.exammodule.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -119,7 +120,7 @@ public class QuestionServiceImpl implements QuestionService {
 
 	@Override
 	public QuestionFormBean getAQuestion(Integer questionOrder)
-			throws Exception {
+			throws AllQuestionsAnsweredException,Exception {
 		TreeMap<String, String> optionList = new TreeMap<String, String>();
 		StringBuffer wholeQuestion = new StringBuffer();
 		wholeQuestion.append("$");
