@@ -47,5 +47,5 @@ function displayRemainingTime() {
 }
 
 function examTimedOut() {
-	this.document.examForm.submit();
+	this.document.getElementById("logoutForm").submit();
 }
