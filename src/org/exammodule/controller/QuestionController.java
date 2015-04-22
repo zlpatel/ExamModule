@@ -42,6 +42,7 @@ public class QuestionController {
 			mav.addObject("message",
 					e.getMessage());
 			e.printStackTrace();
+			return mav;
 		}catch (Exception e) {
 			mav.setViewName("questionerr");
 			mav.addObject("message",
