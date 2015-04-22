@@ -49,7 +49,7 @@ protected static Logger logger = Logger.getLogger("service");
 		List<GrantedAuthority> authorities) {
 		return new User(user.getUserName(), 
 			user.getPassword(), true, 
-                        true, true, true , authorities);
+                        true, true, user.isAccountNotBlocked() , authorities);
 	}
  
 	private List<GrantedAuthority> buildUserAuthority(String access) {
@@ -74,6 +74,13 @@ protected static Logger logger = Logger.getLogger("service");
  
 		return Result;
 	}
+	
+	@Transactional
+	@Override
+	public void blockUserAccount(String userName) throws Exception{
+		userDao.setAccountNonBlockedStatus(userName,false);
+	}
+	
 	@Transactional
 	@Override
 	public UserDAO getUserDao() throws Exception{

@@ -7,5 +7,6 @@ public interface CustomUserDetailsService {
 
 	UserDAO getUserDao() throws Exception;
 	void setUserDao(UserDAO userDao) throws Exception;
+	void blockUserAccount(String userName) throws Exception;
 
 }

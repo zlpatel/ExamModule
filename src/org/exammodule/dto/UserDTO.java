@@ -36,6 +36,9 @@ public class UserDTO implements Serializable
     
     @Column(nullable = false, length = 10)
     private String access;
+    
+    @Column(name="account_not_blocked")
+    private boolean accountNotBlocked;
     /**
 	 * Access level of the user. 
 	 * 1 = Admin user
@@ -112,5 +115,14 @@ public class UserDTO implements Serializable
 	public void setAccess(String access) {
 		this.access = access;
 	}
+
+	public boolean isAccountNotBlocked() {
+		return accountNotBlocked;
+	}
+
+	public void setAccountNotBlocked(boolean accountNotBlocked) {
+		this.accountNotBlocked = accountNotBlocked;
+	}
+	
     
 }

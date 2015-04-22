@@ -2,13 +2,18 @@ package org.exammodule.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.log4j.Logger;
 import org.exammodule.form.AdditionalQuestionsRecordFormBean;
+import org.exammodule.form.QuestionFormBean;
 import org.exammodule.form.RegularQuestionsRecordFormBean;
+import org.exammodule.form.ResetFormBean;
 import org.exammodule.form.StudentsRecordFormBean;
 import org.exammodule.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,6 +33,29 @@ public class AdminController
 	public String getAdminPage() {
 		logger.debug("Received request to show admin page");
 		return "adminpage";
+	}
+	
+	@RequestMapping(value = "/resetAcccount", method = RequestMethod.GET)
+	public String resetStudentAccount() {
+		logger.debug("Received request to show reset account page");
+		return "resetaccountpage";
+	}
+	
+	@RequestMapping(value = "/resetFormSubmit", method = RequestMethod.POST)
+	public ModelAndView resetFormSubmitted(@ModelAttribute("command")ResetFormBean reset,
+			HttpSession session) {
+		logger.debug("Received request for submitting reset form");
+		ModelAndView mav=new ModelAndView();
+		try {
+			adminService.resetUserAccount(reset.getUserName(), reset.getFullName());
+		} catch (Exception e) {
+			ModelAndView model=new ModelAndView("adminerr");
+			model.addObject("message", "Something went wrong, please try again later!");
+			return model;
+		}
+		mav.addObject("message", "Account successfully reset for "+reset.getFullName());
+		mav.setViewName("resetaccountpage");
+		return mav;
 	}
 	
 	@RequestMapping(value = "/studentsRecord", method = RequestMethod.GET)

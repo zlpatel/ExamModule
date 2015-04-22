@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.exammodule.dao.UserDAO;
+import org.exammodule.dto.AttemptsDTO;
 import org.exammodule.dto.UserDTO;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -52,5 +53,30 @@ public class UserDAOImpl implements UserDAO{
 			return userDTO;
 		logger.error("Student does not exist!");
 		throw new Exception("Student does not exist!");
+	}
+	
+	@Override
+	public void resetBlockedAccount(String userName,String fullName,boolean status) throws Exception{
+		logger.debug("Request to change account blocked status");
+		Query query = sessionFactory.getCurrentSession().createQuery("FROM UserDTO u WHERE u.userName = :userName and u.name = :fullName");
+		query.setString("userName", userName);
+		query.setString("fullName", fullName);
+		UserDTO user = (UserDTO) query.uniqueResult();
+		if(user!=null){
+			Query query2 = sessionFactory.getCurrentSession().createQuery("delete AttemptsDTO a WHERE a.userName = :userName");
+			query2.setString("userName",user.getUserName());
+			query.executeUpdate();
+			user.setAccountNotBlocked(status);
+			sessionFactory.getCurrentSession().saveOrUpdate(user);
+		}
+		throw new Exception("Student does not exist!");
+	}
+
+	@Override
+	public void setAccountNonBlockedStatus(String userName, boolean status) throws Exception {
+		logger.debug("Request to change account blocked status");
+		UserDTO user = getThisStudent(userName);
+		user.setAccountNotBlocked(status);
+		sessionFactory.getCurrentSession().saveOrUpdate(user);
 	}
 }

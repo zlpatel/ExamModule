@@ -60,6 +60,13 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Transactional
 	@Override
+	public void resetUserAccount(String userName,String fullName) throws Exception{
+		userDAO.resetBlockedAccount(userName, fullName, true);
+	}
+	
+	
+	@Transactional
+	@Override
 	public List<RegularQuestionsRecordFormBean> getRegularQuestionsRecord(
 			String userName) throws Exception{
 		logger.debug("Received request get regular questions records in admin service");

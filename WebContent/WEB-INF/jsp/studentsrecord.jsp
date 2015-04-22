@@ -35,6 +35,7 @@
 <ul class="nav navbar-nav">
 		<li><a href="home">Home</a></li>
 		<li class="active"><a href="#">Students Record</a></li>
+		<li><a href="resetForm">Reset Student Account</a></li>
 		<li><a href="javascript:formSubmit()">Logout</a></li>
 	</ul>
 	</nav>
