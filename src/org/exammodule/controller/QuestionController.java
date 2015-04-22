@@ -117,6 +117,6 @@ public class QuestionController {
 		if (session != null) {
             session.setAttribute("TIME", remainingTime);
         }
-		return "redirect:../../question";
+		return "redirect:../user/question";
 	}
 }

@@ -32,7 +32,7 @@ public class UserController
             session.setAttribute("TEST_START_TIME", testStartTime);
             session.setAttribute("TIME", Constants.TEST_TIME);
         } 
-		return "redirect:../question";
+		return "redirect:../user/question";
 	}
 }
 

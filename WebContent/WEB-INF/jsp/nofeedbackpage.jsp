@@ -55,7 +55,7 @@
 		}
 	</script>
 	
-	<a class="btn btn-info" href="question">Go to Next Question</a>
+	<a class="btn btn-info" href="nextQuestion">Go to Next Question</a>
 	
 </body>
 </html>
