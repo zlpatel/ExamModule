@@ -42,7 +42,7 @@
 
 	<nav class="navbar navbar-default navbar-static-top">
 	<ul class="nav navbar-nav">
-		<li><a href="../home">Home</a></li>
+		<li><a href="home">Home</a></li>
 		<li><a href="studentsRecord">Students Record</a></li>
 		<li class="active"><a href="#">Reset Student Account</a></li>
 		<li><a href="javascript:formSubmit()">Logout</a></li>
@@ -50,7 +50,7 @@
 	</nav>
 	<br>
 	<center>
-		<h4>{message}</h4>
+		<h4>${message}</h4>
 	</center>
 	<form id="resetform" action="resetFormSubmit" method="post"
 		modelattribute="command">
@@ -61,13 +61,13 @@
 					<div class="form-login">
 						<h4>Reset Student Account</h4>
 						<input type="text" id="userName" name="userName"
-							placeholder="username" value="${command.userName}" required
+							placeholder="username" value="${command.userName}" class="form-control input-sm chat-input" required
 							autofocus /> </br> <input type="text" id="fullName" name="fullName"
-							placeholder="full name" value="${command.fullName}" required /> </br>
+							placeholder="full name" value="${command.fullName}" class="form-control input-sm chat-input" required /> </br>
 						<div class="wrapper">
 							<span class="group-btn">
 								<center>
-									<a href="javascript:formSubmit()"
+									<a href="javascript:resetFormSubmit()"
 										class="btn btn-primary btn-md">submit</a>
 								</center>
 							</span>
@@ -80,7 +80,21 @@
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
 	</form>
-
-	</div>
+	<c:url value="/j_spring_security_logout" var="logoutUrl" />
+	<!-- csrf for log out-->
+	<form action="${logoutUrl}" method="post" id="logoutForm">
+		<input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+	</form>
+	<script>
+		function formSubmit() {
+			document.getElementById("logoutForm").submit();
+		}
+	</script>
+	<script>
+		function resetFormSubmit() {
+			document.getElementById("resetform").submit();
+		}
+	</script>
 </body>
 </html>

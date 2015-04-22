@@ -34,38 +34,13 @@
 	<nav class="navbar navbar-default navbar-static-top">
 <ul class="nav navbar-nav">
 		<li><a href="home">Home</a></li>
-		<li class="active"><a href="#">Students Record</a></li>
-		<li><a href="resetAccount">Reset Student Account</a></li>
+		<li><a href="studentsRecord">Students Record</a></li>
+		<li class="active"><a href="#">Reset Student Account</a></li>
 		<li><a href="javascript:formSubmit()">Logout</a></li>
 	</ul>
 	</nav>
 	<br>
-	<form:form method="GET">
-		<div class="table-responsive">
-		<table class="table table-bordered table-hover">
-			<thead>
-				<tr class="success">
-					<th class="text-center">Student Name</th>
-					<th class="text-center">Right Attempts</th>
-					<th class="text-center">Wrong Attempts</th>
-					<th class="text-center" colspan="2">Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach items="${recordList}" var="studentRecord">
-					<tr>
-						<td class="text-center">${studentRecord.studentName}</td>
-						<td class="text-center">${studentRecord.rightAttemptCount}</td>
-						<td class="text-center">${studentRecord.wrongAttemptCount}</td>
-						<td class="text-center"><input style="width:100px;" name="RegularQuestions" type="submit" value= "Regular" title="regular questions details" class = "btn btn-info btn-xs" onclick="document.forms[0].method = 'post';document.forms[0].action = 'regularQuestionsRecords/${studentRecord.userName}'; ;return true;"/></td>
-						<td class="text-center"><input style="width:100px;" name="AdditionalQuestions" type="submit" value= "Additional" title="additional questions details" class = "btn btn-info btn-xs" onclick="document.forms[0].method = 'post';document.forms[0].action = 'additionalQuestionsRecords/${studentRecord.userName}'; ;return true;"/></td>
-					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-		</div>
-	</form:form>
-
+	${message}
 	<c:url value="/j_spring_security_logout" var="logoutUrl" />
 
 	<!-- csrf for log out-->

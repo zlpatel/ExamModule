@@ -35,7 +35,7 @@ public class AdminController
 		return "adminpage";
 	}
 	
-	@RequestMapping(value = "/resetAcccount", method = RequestMethod.GET)
+	@RequestMapping(value = "/resetAccount", method = RequestMethod.GET)
 	public String resetStudentAccount() {
 		logger.debug("Received request to show reset account page");
 		return "resetaccountpage";
@@ -49,8 +49,9 @@ public class AdminController
 		try {
 			adminService.resetUserAccount(reset.getUserName(), reset.getFullName());
 		} catch (Exception e) {
-			ModelAndView model=new ModelAndView("adminerr");
-			model.addObject("message", "Something went wrong, please try again later!");
+			e.printStackTrace();
+			ModelAndView model=new ModelAndView("resetformerr");
+			model.addObject("message", e.getMessage());
 			return model;
 		}
 		mav.addObject("message", "Account successfully reset for "+reset.getFullName());

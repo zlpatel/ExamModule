@@ -62,14 +62,15 @@ public class UserDAOImpl implements UserDAO{
 		query.setString("userName", userName);
 		query.setString("fullName", fullName);
 		UserDTO user = (UserDTO) query.uniqueResult();
-		if(user!=null){
-			Query query2 = sessionFactory.getCurrentSession().createQuery("delete AttemptsDTO a WHERE a.userName = :userName");
+		if(user==null){
+			throw new Exception("Student does not exist!");
+		}else if(user!=null){
+			Query query2 = sessionFactory.getCurrentSession().createQuery("delete FROM AttemptsDTO a WHERE a.user.userName = :userName");
 			query2.setString("userName",user.getUserName());
-			query.executeUpdate();
+			query2.executeUpdate();
 			user.setAccountNotBlocked(status);
 			sessionFactory.getCurrentSession().saveOrUpdate(user);
 		}
-		throw new Exception("Student does not exist!");
 	}
 
 	@Override
