@@ -57,7 +57,7 @@
 	<c:choose>
 		<c:when test="${not empty feedbackImageName}">
 			<h2>Below is the explained solution for the question.</h2>
-			<img alt="solution" src="${pageContext.request.contextPath}/externalresources/image/${feedbackImageName}">
+			<img alt="solution" src="${pageContext.request.contextPath}/externalresources/images/${feedbackImageName}">
 		</c:when>
 	</c:choose>
 

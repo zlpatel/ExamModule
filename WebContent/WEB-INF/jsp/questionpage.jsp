@@ -82,7 +82,7 @@
 				<td><c:choose>
 						<c:when test="${not empty command.questionImage}">
 							<img alt="question image"
-								src="${pageContext.request.contextPath}/externalresources/image/${command.questionImage}">
+								src="${pageContext.request.contextPath}/externalresources/images/${command.questionImage}">
 						</c:when>
 					</c:choose></td>
 			</tr>
