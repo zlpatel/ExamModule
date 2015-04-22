@@ -6,13 +6,14 @@ import java.util.List;
 import org.exammodule.dto.AttemptsDTO;
 import org.exammodule.dto.QuestionsDTO;
 import org.exammodule.dto.UserDTO;
+import org.exammodule.exception.AllQuestionsAnsweredException;
 
 
 
 public interface QuestionDAO 
 {
 	Integer getNumberOfQuestions() throws Exception;
-	QuestionsDTO getThisQuestion(Integer questionOrder) throws Exception;
+	QuestionsDTO getThisQuestion(Integer questionOrder) throws AllQuestionsAnsweredException,Exception;
 	void markAsRightAttempted(QuestionsDTO question,Date startTime, String selectedOption, UserDTO user) throws Exception;
 	void markAsWrongAttempted(QuestionsDTO question,Date startTime, String selectedOption, UserDTO user) throws Exception;
 	long getRightAttemptCount(String userName) throws Exception;
