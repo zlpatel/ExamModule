@@ -5,8 +5,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<noscript>
+  <meta HTTP-EQUIV="Refresh" CONTENT="0;URL=/ExamModule/secure/jserror">
+</noscript>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Student Record</title>
+<title>Error</title>
 <!-- Latest compiled and minified CSS -->
 
 <link rel="stylesheet"
@@ -25,10 +28,10 @@
 </head>
 <body>
 	<center>
-		<h1 class="bg-primary">QUESTION BANK</h1>
+		<h1 class="bg-primary">MATHEMATICS TEST</h1>
 	</center>
 	<center>
-		<h4>Hi! ${USERNAME}</h4>
+		<h4>Hi, ${name}</h4>
 	</center>
 
 	<nav class="navbar navbar-default navbar-static-top">
@@ -39,16 +42,15 @@
 		<li><a href="javascript:formSubmit()">Logout</a></li>
 	</ul>
 	</nav>
-	<br>
-	${message}
+	<a class="fa fa-arrow-circle-left fa-1x btn btn-info"
+			href="resetAccount">Back</a>
+	<br><center><h4>${message}</h4></center>
 	<c:url value="/j_spring_security_logout" var="logoutUrl" />
-
 	<!-- csrf for log out-->
 	<form action="${logoutUrl}" method="post" id="logoutForm">
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
 	</form>
-
 	<script>
 		function formSubmit() {
 			document.getElementById("logoutForm").submit();

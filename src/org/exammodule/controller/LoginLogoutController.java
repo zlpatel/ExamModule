@@ -18,47 +18,51 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/auth")
 public class LoginLogoutController {
-        
+
 	protected static Logger logger = Logger.getLogger("controller");
 
 	@Autowired
 	SecurityContextAccessor securityContextAccessor;
-	
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String getLoginPage(@RequestParam(value="error", required=false) boolean error, 
 			ModelMap model,HttpServletRequest request,HttpSession session) {
 		logger.debug("Received request to show login page");
-		if (securityContextAccessor.isCurrentAuthenticationAnonymous()) {
-			if (error == true) {
-				model.put("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
-			} else {
-				model.put("error", "");
+		try{
+			if (securityContextAccessor.isCurrentAuthenticationAnonymous()) {
+				if (error == true) {
+					model.put("error", getErrorMessage(request, "SPRING_SECURITY_LAST_EXCEPTION"));
+				} else {
+					model.put("error", "");
+				}
+				return "loginpage";
+			} else { 
+				System.out.println(session.getAttribute("USERNAME"));
+				return securityContextAccessor.determineDefaultTargetUrl();
 			}
-		    return "loginpage";
-		 } else { 
-			 System.out.println(session.getAttribute("USERNAME"));
-		    return securityContextAccessor.determineDefaultTargetUrl();
-		 }
-		
+		}catch(Exception e){
+			session.invalidate();
+			return "err";
+		}
 	}
-	
+
 	@RequestMapping(value = "/denied", method = RequestMethod.GET)
- 	public String getDeniedPage() {
+	public String getDeniedPage() {
 		logger.debug("Received request to show denied page");
-		
+
 		return "deniedpage";
 	}
-	
+
 	private String getErrorMessage(HttpServletRequest request, String key){
-		 
+
 		Exception exception = 
-                   (Exception) request.getSession().getAttribute(key);
- 
+				(Exception) request.getSession().getAttribute(key);
+
 		String error = "";
 		if (exception instanceof BadCredentialsException) {
-			error = "Invalid username and password!";
+			error = "Invalid username or password!";
 		}else if(exception instanceof LockedException) {
-			error = exception.getMessage();
+			error = "Your test has expired, please contact administrator!";
 		}else{
 			error = "Invalid username and password!";
 		}

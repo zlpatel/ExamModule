@@ -7,6 +7,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.exammodule.dao.UserDAO;
+import org.exammodule.exception.StudentNotFoundException;
 import org.exammodule.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,33 +28,33 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CustomUserDetailsServiceImpl implements UserDetailsService,CustomUserDetailsService
 {
-protected static Logger logger = Logger.getLogger("service");
-	
+	protected static Logger logger = Logger.getLogger("service");
+
 	@Autowired
 	private UserDAO userDao;
- 
+
 	@Transactional(readOnly=true)
 	@Override
 	public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
- 		org.exammodule.dto.UserDTO user;
+		org.exammodule.dto.UserDTO user;
 		try {
 			user = userDao.fetchUserByUserName(username);
 		} catch (Exception e) {
 			throw new RuntimeException();
 		}
 		List<GrantedAuthority> authorities = buildUserAuthority(user.getAccess());
- 		return buildUserForAuthentication(user, authorities);
- 	}
- 
-	private User buildUserForAuthentication(org.exammodule.dto.UserDTO user, 
-		List<GrantedAuthority> authorities) {
-		return new User(user.getUserName(), 
-			user.getPassword(), true, 
-                        true, true, user.isAccountNotBlocked() , authorities);
+		return buildUserForAuthentication(user, authorities);
 	}
- 
+
+	private User buildUserForAuthentication(org.exammodule.dto.UserDTO user, 
+			List<GrantedAuthority> authorities) {
+		return new User(user.getUserName(), 
+				user.getPassword(), true, 
+				true, true, user.isAccountNotBlocked() , authorities);
+	}
+
 	private List<GrantedAuthority> buildUserAuthority(String access) {
- 
+
 		Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 		String userRole="";
 		if(access.compareTo("1")==0){
@@ -69,30 +70,35 @@ protected static Logger logger = Logger.getLogger("service");
 			userRole="ROLE_USER_NOTHING";
 		}
 		// Build user's authorities
-			setAuths.add(new SimpleGrantedAuthority(userRole));
+		setAuths.add(new SimpleGrantedAuthority(userRole));
 		List<GrantedAuthority> Result = new ArrayList<GrantedAuthority>(setAuths);
- 
+
 		return Result;
 	}
-	
+
 	@Transactional
 	@Override
 	public void blockUserAccount(String userName) throws Exception{
 		userDao.setAccountNonBlockedStatus(userName,false);
 	}
-	
+
 	@Transactional
 	@Override
 	public UserDAO getUserDao() throws Exception{
 		return userDao;
 	}
- 
+
 	@Transactional
 	@Override
 	public void setUserDao(UserDAO userDao) throws Exception{
 		this.userDao = userDao;
 	}
- 
+
+	@Override
+	public String getUserFullName(String username) throws StudentNotFoundException, Exception {
+		return userDao.fetchUserByUserName(username).getName();
+	}
+
 }
 
 

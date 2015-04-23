@@ -5,6 +5,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<noscript>
+  <meta HTTP-EQUIV="Refresh" CONTENT="0;URL=/ExamModule/secure/jserror">
+</noscript>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Student Record</title>
 <!-- Latest compiled and minified CSS -->
@@ -25,10 +28,10 @@
 </head>
 <body>
 	<center>
-		<h1 class="bg-primary">QUESTION BANK</h1>
+		<h1 class="bg-primary">MATHEMATICS TEST</h1>
 	</center>
 	<center>
-		<h4>Hi! ${USERNAME}</h4>
+		<h4>Hi, ${name}</h4>
 	</center>
 
 	<nav class="navbar navbar-default navbar-static-top">

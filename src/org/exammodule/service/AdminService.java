@@ -2,6 +2,7 @@ package org.exammodule.service;
 
 import java.util.List;
 
+import org.exammodule.exception.StudentNotFoundException;
 import org.exammodule.form.AdditionalQuestionsRecordFormBean;
 import org.exammodule.form.RegularQuestionsRecordFormBean;
 import org.exammodule.form.StudentsRecordFormBean;
@@ -17,6 +18,8 @@ public interface AdminService {
 	List<RegularQuestionsRecordFormBean> getRegularQuestionsRecord(
 			String userName) throws Exception;
 
-	public void resetUserAccount(String userName, String fullName) throws Exception;
+	public void resetUserAccount(String userName, String fullName) throws StudentNotFoundException, Exception;
+
+	String getAdminName(String attribute) throws Exception;
 
 	}

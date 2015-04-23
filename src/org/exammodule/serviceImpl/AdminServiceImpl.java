@@ -10,6 +10,7 @@ import org.exammodule.dao.QuestionDAO;
 import org.exammodule.dao.UserDAO;
 import org.exammodule.dto.AttemptsDTO;
 import org.exammodule.dto.UserDTO;
+import org.exammodule.exception.StudentNotFoundException;
 import org.exammodule.form.AdditionalQuestionsRecordFormBean;
 import org.exammodule.form.RegularQuestionsRecordFormBean;
 import org.exammodule.form.StudentsRecordFormBean;
@@ -52,7 +53,7 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Transactional
 	@Override
-	public String getStudentName(String userName) throws Exception {
+	public String getStudentName(String userName) throws StudentNotFoundException, Exception {
 		logger.debug("Received request get a given student record in admin service");
 		UserDTO user=userDAO.getThisStudent(userName);
 		return user.getName();
@@ -60,7 +61,7 @@ public class AdminServiceImpl implements AdminService{
 	
 	@Transactional
 	@Override
-	public void resetUserAccount(String userName,String fullName) throws Exception{
+	public void resetUserAccount(String userName,String fullName) throws StudentNotFoundException, Exception{
 		userDAO.resetBlockedAccount(userName, fullName, true);
 	}
 	
@@ -135,6 +136,13 @@ public class AdminServiceImpl implements AdminService{
 		}
 		Collections.sort(additionalQuestionsRecordList);
 		return additionalQuestionsRecordList;
+	}
+
+	@Override
+	public String getAdminName(String userName) throws Exception {
+		logger.debug("Received request get admin name in admin service");
+		UserDTO user=userDAO.fetchUserByUserName(userName);
+		return user.getName();
 	}
 
 }

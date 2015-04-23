@@ -7,6 +7,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<noscript>
+  <meta HTTP-EQUIV="Refresh" CONTENT="0;URL=/ExamModule/secure/jserror">
+</noscript>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Student Record</title>
 
@@ -42,14 +45,13 @@
 		formula.drawImage(latexCanvas, mathml);
 	}
 </script>
-
 </head>
 <body>
 	<center>
 		<h1 class="bg-primary">MATHEMATICS TEST</h1>
 	</center>
 	<center>
-		<h4>Hi! ${USERNAME}</h4>
+		<h4>Hi, ${name}</h4>
 	</center>
 
 	<nav class="navbar navbar-default navbar-static-top">
@@ -64,8 +66,7 @@
 	<form:form method="GET">
 		<a class="fa fa-arrow-circle-left fa-1x btn btn-info"
 			href="../studentsRecord">Back</a>
-		<center>Statistics for Regular questions answered by the
-			${studentName}</center>
+		<center><h4>Statistics for Regular questions answered by the ${studentName}</h4></center>
 		<div class="table-responsive">
 			<table class="table table-bordered table-hover">
 				<thead>

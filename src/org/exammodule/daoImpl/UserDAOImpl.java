@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.exammodule.dao.UserDAO;
-import org.exammodule.dto.AttemptsDTO;
 import org.exammodule.dto.UserDTO;
+import org.exammodule.exception.StudentNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -23,12 +23,14 @@ public class UserDAOImpl implements UserDAO{
 	
 	//Method to retrieve user by a username
 	@Override
-	public UserDTO fetchUserByUserName(String username) throws Exception{
+	public UserDTO fetchUserByUserName(String username) throws StudentNotFoundException, Exception{
 
 		Session session = null;
 		UserDTO user = null;
 		session = sessionFactory.getCurrentSession();
 		user = (UserDTO)session.get(UserDTO.class, username);
+		if(user==null)
+			throw new StudentNotFoundException("Student not found!");
 		return user;
 	}
 
@@ -43,7 +45,7 @@ public class UserDAOImpl implements UserDAO{
 	}
 
 	@Override
-	public UserDTO getThisStudent(String userName) throws Exception{
+	public UserDTO getThisStudent(String userName) throws StudentNotFoundException, Exception{
 		logger.debug("Request to find a given student in UserDAO");
 		UserDTO userDTO=new UserDTO(); 
 		Query query = sessionFactory.getCurrentSession().createQuery("FROM UserDTO u WHERE u.userName = :userName");
@@ -52,18 +54,18 @@ public class UserDAOImpl implements UserDAO{
 		if(userDTO!=null)
 			return userDTO;
 		logger.error("Student does not exist!");
-		throw new Exception("Student does not exist!");
+		throw new StudentNotFoundException("Student does not exist!");
 	}
 	
 	@Override
-	public void resetBlockedAccount(String userName,String fullName,boolean status) throws Exception{
+	public void resetBlockedAccount(String userName,String fullName,boolean status) throws StudentNotFoundException,Exception{
 		logger.debug("Request to change account blocked status");
 		Query query = sessionFactory.getCurrentSession().createQuery("FROM UserDTO u WHERE u.userName = :userName and u.name = :fullName");
 		query.setString("userName", userName);
 		query.setString("fullName", fullName);
 		UserDTO user = (UserDTO) query.uniqueResult();
 		if(user==null){
-			throw new Exception("Student does not exist!");
+			throw new StudentNotFoundException("Student does not exist!");
 		}else if(user!=null){
 			Query query2 = sessionFactory.getCurrentSession().createQuery("delete FROM AttemptsDTO a WHERE a.user.userName = :userName");
 			query2.setString("userName",user.getUserName());

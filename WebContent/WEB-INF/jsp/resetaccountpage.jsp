@@ -7,8 +7,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<noscript>
+  <meta HTTP-EQUIV="Refresh" CONTENT="0;URL=/ExamModule/secure/jserror">
+</noscript>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Login</title>
+<title>Reset</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/externalresources/bootstrap/css/bootstrap.min.css">
@@ -37,7 +40,7 @@
 		<h1 class="bg-primary">MATHEMATICS TEST</h1>
 	</center>
 	<center>
-		<h4>Hi! ${USERNAME}</h4>
+		<h4>Hi, ${name}</h4>
 	</center>
 
 	<nav class="navbar navbar-default navbar-static-top">
@@ -50,20 +53,21 @@
 	</nav>
 	<br>
 	<center>
-		<h4>${message}</h4>
+		<h4>
+			Please enter the full name and ASUID of the student whose test you want to reset in the space provided below.<br><br>
+			${message}
+		</h4>
 	</center>
-	<form id="resetform" action="resetFormSubmit" method="post"
-		modelattribute="command">
-
+	<form id="resetform" action="resetFormSubmit" method="post"	modelattribute="command">
 		<div class="container">
 			<div class="row">
 				<div class="col-md-offset-5 col-md-3">
 					<div class="form-login">
 						<h4>Reset Student Account</h4>
 						<input type="text" id="userName" name="userName"
-							placeholder="username" value="${command.userName}" class="form-control input-sm chat-input" required
+							placeholder="ASURITE ID" value="${command.userName}" class="form-control input-sm chat-input" required
 							autofocus /> </br> <input type="text" id="fullName" name="fullName"
-							placeholder="full name" value="${command.fullName}" class="form-control input-sm chat-input" required /> </br>
+							placeholder="Full Name" value="${command.fullName}" class="form-control input-sm chat-input" required /> </br>
 						<div class="wrapper">
 							<span class="group-btn">
 								<center>
@@ -76,7 +80,6 @@
 				</div>
 			</div>
 		</div>
-
 		<input type="hidden" name="${_csrf.parameterName}"
 			value="${_csrf.token}" />
 	</form>

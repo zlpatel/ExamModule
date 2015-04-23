@@ -6,6 +6,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
+<noscript>
+  <meta HTTP-EQUIV="Refresh" CONTENT="0;URL=/ExamModule/secure/jserror">
+</noscript>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Questions</title>
 <!-- Latest compiled and minified CSS -->
@@ -41,7 +44,11 @@
 		formula.drawImage(latexCanvas, mathml);
 	}
 </script>
-
+<script>
+  function preventBack(){window.history.forward();}
+  setTimeout("preventBack()", 0);
+  window.onunload=function(){null};
+</script>
 </head>
 <body
 	onload="initializeExamTimer('${TIME}');convertFromLatexToMathML();">
@@ -49,22 +56,21 @@
 		<h1 class="bg-primary">MATHEMATICS TEST</h1>
 	</center>
 	<center>
-		<h4>Hi! ${USERNAME}</h4>
+		<h4>Hi, ${name}</h4>
 	</center>
 
 	<nav class="navbar navbar-default navbar-static-top">
 	<ul class="nav navbar-nav">
 		<li class="active"><a href="#">Test</a></li>
-		<li><a href="javascript:formSubmit()">Logout</a></li>
 	</ul>
 	</nav>
 	<br>
 	<div>
-		<input type="text" id="time" readonly="true">
+		&nbsp;&nbsp;<input type="text" id="time" readonly="true">
 	</div>
 	<br>
 	<form:form method="POST" modelattribute="command">
-		<table>
+		<table cellspacing="20" cellpadding="10">
 			<tr>
 				<td><form:hidden path="questionOrder"
 						value="${command.questionOrder}" /></td>
@@ -87,7 +93,7 @@
 					</c:choose></td>
 			</tr>
 			<tr>
-				<td><form:select element="li" path="selectedOption">
+				<td>&nbsp;&nbsp;<form:select element="li" type="a" path="selectedOption">
 						<c:forEach items="${optionList}" var="option">
 							<form:option value="${option.value}" label="${option.key}" />
 						</c:forEach>
@@ -98,19 +104,5 @@
 			</tr>
 		</table>
 	</form:form>
-
-	<c:url value="/j_spring_security_logout" var="logoutUrl" />
-
-	<!-- csrf for log out-->
-	<form action="${logoutUrl}" method="post" id="logoutForm">
-		<input type="hidden" name="${_csrf.parameterName}"
-			value="${_csrf.token}" />
-	</form>
-
-	<script>
-		function formSubmit() {
-			document.getElementById("logoutForm").submit();
-		}
-	</script>
 </body>
 </html>

@@ -28,7 +28,7 @@ public class QuestionController {
 	@RequestMapping(value = "/question", method = RequestMethod.GET)
 	public ModelAndView initForm(HttpSession session) {
 		logger.debug("Received request to show question page");
-		
+
 		String userName = (String) session.getAttribute("USERNAME");
 		Integer questionOrder = (Integer) session
 				.getAttribute("QUESTION_ORDER");
@@ -38,15 +38,14 @@ public class QuestionController {
 		try {
 			question = questionService.getAQuestion(questionOrder);
 		} catch (AllQuestionsAnsweredException e) {
-			mav.setViewName("questionerr");
+			mav.setViewName("testcomplete");
 			mav.addObject("message",
-					e.getMessage());
+					"Great Job! You completed the test in time. Please Logout!");
 			e.printStackTrace();
 			return mav;
 		}catch (Exception e) {
 			mav.setViewName("questionerr");
-			mav.addObject("message",
-					"Something went wrong, please try again later!");
+			mav.addObject("message", "Something went wrong, please contact the administrator!");
 			return mav;
 		}
 		ModelAndView model = new ModelAndView("questionpage");
@@ -66,14 +65,14 @@ public class QuestionController {
 		String access = (String) session.getAttribute("ACCESS_LEVEL");
 		Integer questionOrder = (Integer) session
 				.getAttribute("QUESTION_ORDER");
-		
+
 		long testCurrentTime=new Date().getTime()/1000;
-		
+
 		long differenceTime=testCurrentTime-(long)session.getAttribute("TEST_START_TIME");
 		long remainingTime=Constants.TEST_TIME-differenceTime;
 		if (session != null) {
-            session.setAttribute("TIME", remainingTime);
-        }
+			session.setAttribute("TIME", remainingTime);
+		}
 
 		if (access == "ROLE_USER_VIDEO") {
 			try {
@@ -81,9 +80,7 @@ public class QuestionController {
 				mav.setViewName("videofeedbackpage");
 			}catch (Exception e) {
 				mav.setViewName("questionerr");
-				mav.addObject("message",
-						"Something went wrong, please try again later!");
-				e.printStackTrace();
+				mav.addObject("message", "Something went wrong, please contact the administrator!");
 			}
 
 		} else if (access == "ROLE_USER_IMAGE") {
@@ -92,9 +89,7 @@ public class QuestionController {
 				mav.setViewName("imagefeedbackpage");
 			} catch (Exception e) {
 				mav.setViewName("questionerr");
-				mav.addObject("message",
-						"Something went wrong, please try again later!");
-				e.printStackTrace();
+				mav.addObject("message", "Something went wrong, please contact the administrator!");
 			}
 
 		} else if (access == "ROLE_USER_NOTHING") {
@@ -107,8 +102,7 @@ public class QuestionController {
 			}
 		} catch (Exception e) {
 			ModelAndView model = new ModelAndView("questionerr");
-			model.addObject("message",
-					"Something went wrong, please try again later!");
+			model.addObject("message", "Something went wrong, please contact the administrator!");
 			return model;
 		}
 		return mav;
@@ -118,13 +112,16 @@ public class QuestionController {
 	@RequestMapping(value = "/nextQuestion", method = RequestMethod.GET)
 	public String nextQuestion(HttpSession session) {
 		logger.debug("Request for next question");
-		long testCurrentTime=new Date().getTime()/1000;
-		
-		long differenceTime=testCurrentTime-(long)session.getAttribute("TEST_START_TIME");
-		long remainingTime=Constants.TEST_TIME-differenceTime;
-		if (session != null) {
-            session.setAttribute("TIME", remainingTime);
-        }
-		return "redirect:../user/question";
+		try{
+			long testCurrentTime=new Date().getTime()/1000;
+			long differenceTime=testCurrentTime-(long)session.getAttribute("TEST_START_TIME");
+			long remainingTime=Constants.TEST_TIME-differenceTime;
+			if (session != null) {
+				session.setAttribute("TIME", remainingTime);
+			}
+			return "redirect:../user/question";
+		}catch(Exception e){
+			return "err";
+		}
 	}
 }
