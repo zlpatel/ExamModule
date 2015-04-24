@@ -47,17 +47,18 @@
 	</ul>
 	</nav>
 	<br>
+	<center>
 	<div>
-		&nbsp;&nbsp;<input type="text" id="time" readonly="true">
+		<input type="text" id="time" readonly="true">
 	</div>
 	<br>
 	<c:choose>
 		<c:when test="${not empty feedbackImageName}">
 			<h2>Below image has the explanation of solution for the previous question.</h2>
 			&nbsp;&nbsp;<img alt="solution"
-				src="${pageContext.request.contextPath}/externalresources/images/${feedbackImageName}">
+				src="${pageContext.request.contextPath}/externalresources/images/${feedbackImageName}" class="feedback-img">
 		</c:when>
 	</c:choose><br><br>
-	&nbsp;&nbsp;<a class="btn btn-info" href="nextQuestion">Go to Next Question</a>
+	<a class="btn btn-info" href="nextQuestion">Go to Next Question</a></center>
 </body>
 </html>

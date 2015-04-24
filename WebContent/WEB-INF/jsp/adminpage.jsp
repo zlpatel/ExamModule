@@ -34,7 +34,6 @@
 <br>
 	<h2> Please read the below instructions:</h2>
 	<h3>
-	&nbsp;&nbsp;- This is your home page.<br>
 	&nbsp;&nbsp;- You can click on the "Students Record" tab above to see details of students' performance on the test.<br>
 	&nbsp;&nbsp;- You can click on the "Logout" tab to logout.<br>
 	&nbsp;&nbsp;- You can click on the "Reset Student Account" tab to reset the test of a student. <br>

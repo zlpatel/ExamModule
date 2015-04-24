@@ -65,12 +65,13 @@
 	</ul>
 	</nav>
 	<br>
+	<center>
 	<div>
-		&nbsp;&nbsp;<input type="text" id="time" readonly="true">
-	</div>
+		<input type="text" id="time" readonly="true">
+	</div></center>
 	<br>
 	<form:form method="POST" modelattribute="command">
-		<table cellspacing="20" cellpadding="10">
+		<center><table cellspacing="30" cellpadding="10">
 			<tr>
 				<td><form:hidden path="questionOrder"
 						value="${command.questionOrder}" /></td>
@@ -85,7 +86,7 @@
 					value="${command.wholeQuestion}" style="width: 500px; height: 20px"></input>
 					<canvas id="latexCanvas" width="0" height="0"
 						style="border:0px solid #000000;"></canvas></td>
-				<td><c:choose>
+				<td ><c:choose>
 						<c:when test="${not empty command.questionImage}">
 							<img alt="question image"
 								src="${pageContext.request.contextPath}/externalresources/images/${command.questionImage}">
@@ -93,16 +94,13 @@
 					</c:choose></td>
 			</tr>
 			<tr>
-				<td>&nbsp;&nbsp;<form:select element="li" type="a" path="selectedOption">
+				<td><center><form:select element="li" type="a" path="selectedOption">
 						<c:forEach items="${optionList}" var="option">
-							<form:option value="${option.value}" label="${option.key}" />
+							<form:option value="${option.value}" label="${option.key}"  />
 						</c:forEach>
-					</form:select></td>
+					</form:select>&nbsp;&nbsp;&nbsp;&nbsp;<input class="btn btn-primary" type="submit" name="submit" value="Submit"></center></td>
 			</tr>
-			<tr>
-				<td><input type="submit" name="submit" value="Submit"></td>
-			</tr>
-		</table>
+		</table></center>
 	</form:form>
 </body>
 </html>

@@ -44,18 +44,19 @@
 	</ul>
 	</nav>
 	<br>
+	<center>
 	<div>
-		&nbsp;&nbsp;<input type="text" id="time" readonly="true">
+		<input type="text" id="time" readonly="true">
 	</div>
 	<br>
 	<c:choose>
 		<c:when test="${not empty feedbackVideoLink}">
 			<h2>Below video has the explanation of solution for the previous question.</h2>
-			<video width="400" controls> <source
+			<video height="700" width="800" controls> <source
 				src="${feedbackVideoLink}" type="video/mp4"> Your browser
 			does not support HTML5 video. </video>
 		</c:when>
 	</c:choose><br><br>
-	&nbsp;&nbsp;<a class="btn btn-info" href="nextQuestion">Go to Next Question</a>
+	<a class="btn btn-info" href="nextQuestion">Go to Next Question</a></center>
 </body>
 </html>

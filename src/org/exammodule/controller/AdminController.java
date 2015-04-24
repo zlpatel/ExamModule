@@ -1,11 +1,13 @@
 package org.exammodule.controller;
 
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.exammodule.exception.StudentNotFoundException;
+import org.exammodule.form.AddStudentFormBean;
 import org.exammodule.form.AdditionalQuestionsRecordFormBean;
 import org.exammodule.form.RegularQuestionsRecordFormBean;
 import org.exammodule.form.ResetFormBean;
@@ -26,13 +28,13 @@ public class AdminController
 {
 	@Autowired
 	private AdminService adminService;
-	
+
 	protected static Logger logger = Logger.getLogger("controller");
-	
+
 	@RequestMapping(value = "/home", method = RequestMethod.GET)
 	public ModelAndView getAdminPage(HttpSession session) {
 		logger.debug("Received request to show admin page");
-		
+
 		ModelAndView model=new ModelAndView("adminpage");
 		try {
 			String fullName=adminService.getAdminName((String)session.getAttribute("USERNAME"));
@@ -44,13 +46,46 @@ public class AdminController
 			return model;
 		}
 	}
-	
+
 	@RequestMapping(value = "/resetAccount", method = RequestMethod.GET)
 	public String resetStudentAccount() {
 		logger.debug("Received request to show reset account page");
 		return "resetaccountpage";
 	}
-	
+
+	@RequestMapping(value = "/addStudent", method = RequestMethod.GET)
+	public String addStudentAccount() {
+		TreeMap<String,String> accessCategoryList=new TreeMap<String,String>();
+		accessCategoryList.put("Admin", "1");
+		accessCategoryList.put("Video", "2");
+		accessCategoryList.put("Image", "3");
+		accessCategoryList.put("Nothing", "4");
+		logger.debug("Received request to show add account page");
+		return "addaccountpage";
+	}
+
+	@RequestMapping(value = "/addStudent", method = RequestMethod.POST)
+	public ModelAndView addStudentAccount(@ModelAttribute("command")AddStudentFormBean student,
+			HttpSession session) {
+		logger.debug("Received request to add account");
+		ModelAndView model=null;
+		try {
+			model=new ModelAndView("adduserpage");
+			adminService.addStudent(student);
+			model.addObject("message", "User"+ student.getFullName() +" successfuly added");
+			student.setFullName("");
+			student.setPassWord("");
+			student.setUserName("");
+			student.setSelectedAccess("No Feedback");
+			return model;
+		}catch (Exception e) {
+			logger.debug("DB exception during add student.");
+			model=new ModelAndView("adminerr");
+			model.addObject("message", "User already exist or Error with Database.");
+			return model;
+		}
+	}
+
 	@RequestMapping(value = "/resetFormSubmit", method = RequestMethod.POST)
 	public ModelAndView resetFormSubmitted(@ModelAttribute("command")ResetFormBean reset,
 			HttpSession session) {
@@ -74,7 +109,7 @@ public class AdminController
 		mav.setViewName("resetaccountpage");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/studentsRecord", method = RequestMethod.GET)
 	public ModelAndView getStudentsRecord(HttpSession session) {
 		logger.debug("Received request to all student record");
@@ -91,7 +126,7 @@ public class AdminController
 		mav.addObject("recordList",recordList);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/regularQuestionsRecords/{userName}", method = RequestMethod.POST)
 	public ModelAndView getSingleStudentRegularQuestionsDetails(@PathVariable String userName, HttpSession session) {
 		logger.debug("Received request to show single student record for Regular Questions");

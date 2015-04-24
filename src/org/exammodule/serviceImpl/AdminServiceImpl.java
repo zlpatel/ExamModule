@@ -11,9 +11,11 @@ import org.exammodule.dao.UserDAO;
 import org.exammodule.dto.AttemptsDTO;
 import org.exammodule.dto.UserDTO;
 import org.exammodule.exception.StudentNotFoundException;
+import org.exammodule.form.AddStudentFormBean;
 import org.exammodule.form.AdditionalQuestionsRecordFormBean;
 import org.exammodule.form.RegularQuestionsRecordFormBean;
 import org.exammodule.form.StudentsRecordFormBean;
+import org.exammodule.handler.HashCode;
 import org.exammodule.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,20 @@ public class AdminServiceImpl implements AdminService{
 	private UserDAO userDAO;
 	@Autowired
 	private QuestionDAO questionDAO;
+	
+	@Transactional
+	@Override
+	public boolean addStudent(AddStudentFormBean student) throws Exception{
+		UserDTO studentDTO=new UserDTO();
+		studentDTO.setName(student.getFullName());
+		studentDTO.setUserName(student.getUserName());
+		studentDTO.setAccountNotBlocked(true);
+		studentDTO.setPassword(HashCode.getHashPassword(student.getPassWord()));
+		studentDTO.setAccess(student.getSelectedAccess());
+		
+		userDAO.addStudent(studentDTO);
+		return true;
+	} 
 	
 	@Transactional
 	@Override
@@ -77,8 +93,8 @@ public class AdminServiceImpl implements AdminService{
 		for(AttemptsDTO question : regularQuestionsListForRightAttempts)
 		{
 			RegularQuestionsRecordFormBean regularQuestionsRecord=new RegularQuestionsRecordFormBean();
-			regularQuestionsRecord.setQuestionName("$ \\documentclass[14pt]{report} $ $\\begin{document}$"+question.getQuestion().getStatement()+" $\\end{document} $");
-			regularQuestionsRecord.setMarkedAnswer("$ \\documentclass[14pt]{report} $ $\\begin{document}$"+question.getSelectedAnswer()+" $\\end{document} $");
+			regularQuestionsRecord.setQuestionName("$ \\documentclass[14pt]{report} $ $\\begin{document}"+question.getQuestion().getStatement()+" \\end{document} $");
+			regularQuestionsRecord.setMarkedAnswer("$ \\documentclass[14pt]{report} $ $\\begin{document}"+question.getSelectedAnswer()+" \\end{document} $");
 			regularQuestionsRecord.setStartTime(question.getStartTime());
 			regularQuestionsRecord.setAttemptTime(question.getAttemptTime());
 			regularQuestionsRecord.setResult(true);
@@ -90,8 +106,8 @@ public class AdminServiceImpl implements AdminService{
 		{
 			RegularQuestionsRecordFormBean regularQuestionsRecord=new RegularQuestionsRecordFormBean();
 			
-			regularQuestionsRecord.setQuestionName("$ \\documentclass[14pt]{report} $ $\\begin{document} $"+question.getQuestion().getStatement()+"  $\\end{document} $");
-			regularQuestionsRecord.setMarkedAnswer("$ \\documentclass[14pt]{report} $ $\\begin{document} $"+question.getSelectedAnswer()+"  $\\end{document} $");
+			regularQuestionsRecord.setQuestionName("$ \\documentclass[14pt]{report} $ $\\begin{document} "+question.getQuestion().getStatement()+"  \\end{document} $");
+			regularQuestionsRecord.setMarkedAnswer("$ \\documentclass[14pt]{report} $ $\\begin{document} "+question.getSelectedAnswer()+"  \\end{document} $");
 			regularQuestionsRecord.setStartTime(question.getStartTime());
 			regularQuestionsRecord.setAttemptTime(question.getAttemptTime());
 			regularQuestionsRecord.setResult(false);
@@ -113,8 +129,8 @@ public class AdminServiceImpl implements AdminService{
 		for(AttemptsDTO question : additionalQuestionsListForRightAttempts)
 		{
 			AdditionalQuestionsRecordFormBean additionalQuestionsRecord=new AdditionalQuestionsRecordFormBean();
-			additionalQuestionsRecord.setQuestionName("$ \\documentclass[14pt]{report} $ $\\begin{document} $"+question.getQuestion().getStatement()+" $\\end{document} $");
-			additionalQuestionsRecord.setMarkedAnswer("$ \\documentclass[14pt]{report} $ $\\begin{document} $"+question.getSelectedAnswer()+" $\\end{document} $");
+			additionalQuestionsRecord.setQuestionName("$ \\documentclass[14pt]{report} $ $\\begin{document} "+question.getQuestion().getStatement()+" \\end{document} $");
+			additionalQuestionsRecord.setMarkedAnswer("$ \\documentclass[14pt]{report} $ $\\begin{document} "+question.getSelectedAnswer()+" \\end{document} $");
 			additionalQuestionsRecord.setStartTime(question.getStartTime());
 			additionalQuestionsRecord.setAttemptTime(question.getAttemptTime());
 			additionalQuestionsRecord.setResult(true);
@@ -126,8 +142,8 @@ public class AdminServiceImpl implements AdminService{
 		{
 			AdditionalQuestionsRecordFormBean additionalQuestionsRecord=new AdditionalQuestionsRecordFormBean();
 			
-			additionalQuestionsRecord.setQuestionName("$ \\documentclass[14pt]{report} $ $\\begin{document} $"+question.getQuestion().getStatement()+" $\\end{document} $");
-			additionalQuestionsRecord.setMarkedAnswer("$ \\documentclass[14pt]{report} $ $\\begin{document} $"+question.getSelectedAnswer()+" $\\end{document} $");
+			additionalQuestionsRecord.setQuestionName("$ \\documentclass[14pt]{report} $ $\\begin{document} "+question.getQuestion().getStatement()+" \\end{document} $");
+			additionalQuestionsRecord.setMarkedAnswer("$ \\documentclass[14pt]{report} $ $\\begin{document} "+question.getSelectedAnswer()+" \\end{document} $");
 			additionalQuestionsRecord.setStartTime(question.getStartTime());
 			additionalQuestionsRecord.setAttemptTime(question.getAttemptTime());
 			additionalQuestionsRecord.setResult(false);

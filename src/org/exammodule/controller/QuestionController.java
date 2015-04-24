@@ -80,6 +80,7 @@ public class QuestionController {
 				mav.setViewName("videofeedbackpage");
 			}catch (Exception e) {
 				mav.setViewName("questionerr");
+				session.invalidate();
 				mav.addObject("message", "Something went wrong, please contact the administrator!");
 			}
 
@@ -89,6 +90,7 @@ public class QuestionController {
 				mav.setViewName("imagefeedbackpage");
 			} catch (Exception e) {
 				mav.setViewName("questionerr");
+				session.invalidate();
 				mav.addObject("message", "Something went wrong, please contact the administrator!");
 			}
 
@@ -102,6 +104,7 @@ public class QuestionController {
 			}
 		} catch (Exception e) {
 			ModelAndView model = new ModelAndView("questionerr");
+			session.invalidate();
 			model.addObject("message", "Something went wrong, please contact the administrator!");
 			return model;
 		}

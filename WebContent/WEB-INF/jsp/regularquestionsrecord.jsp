@@ -66,7 +66,7 @@
 	<form:form method="GET">
 		<a class="fa fa-arrow-circle-left fa-1x btn btn-info"
 			href="../studentsRecord">Back</a>
-		<center><h4>Statistics for Regular questions answered by the ${studentName}</h4></center>
+		<center><h4>Statistics for Regular questions answered by the <b>${studentName}</b></h4></center>
 		<div class="table-responsive">
 			<table class="table table-bordered table-hover">
 				<thead>

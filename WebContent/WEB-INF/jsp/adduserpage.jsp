@@ -11,7 +11,7 @@
   <meta HTTP-EQUIV="Refresh" CONTENT="0;URL=/ExamModule/secure/jserror">
 </noscript>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Reset</title>
+<title>Add User</title>
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/externalresources/bootstrap/css/bootstrap.min.css">
@@ -47,14 +47,15 @@
 	<ul class="nav navbar-nav">
 		<li><a href="home">Home</a></li>
 		<li><a href="studentsRecord">Students Record</a></li>
-		<li class="active"><a href="#">Reset Student Account</a></li>
+		<li><a href="resetAccount">Reset Student Account</a></li>
+		<li class="active"><a href="#">Add User</a></li>
 		<li><a href="javascript:formSubmit()">Logout</a></li>
 	</ul>
 	</nav>
 	<br>
 	<center>
 		<h4>
-			Please enter the full name and ASURITE ID of the student whose test you want to reset in the space provided below.<br><br>
+			Please enter the user information below.<br><br>
 			${message}
 		</h4>
 	</center>
@@ -63,11 +64,20 @@
 			<div class="row">
 				<div class="col-md-offset-5 col-md-3">
 					<div class="form-login">
-						<h4>Reset Student Account</h4>
+						<h4>Add User Account</h4>
 						<input type="text" id="userName" name="userName"
 							placeholder="ASURITE ID" value="${command.userName}" class="form-control input-sm chat-input" required
-							autofocus /> </br> <input type="text" id="fullName" name="fullName"
+							autofocus /> </br>
+						<input type="password" id="passWord" name="passWord"
+							placeholder="Password" value="${command.passWord}" class="form-control input-sm chat-input" required
+						 /> </br> 
+						<input type="text" id="fullName" name="fullName"
 							placeholder="Full Name" value="${command.fullName}" class="form-control input-sm chat-input" required /> </br>
+						<form:select  type="1" path="selectedAccess">
+						
+							
+						
+						</form:select>
 						<div class="wrapper">
 							<span class="group-btn">
 								<center>

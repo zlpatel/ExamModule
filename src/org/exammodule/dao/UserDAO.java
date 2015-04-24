@@ -12,6 +12,7 @@ public interface UserDAO {
 	public void resetBlockedAccount(String userName, String fullName, boolean status)
 			throws Exception;
 	public void setAccountNonBlockedStatus(String userName, boolean b) throws Exception;
+	public boolean addStudent(UserDTO user) throws Exception;
 	
 
 }

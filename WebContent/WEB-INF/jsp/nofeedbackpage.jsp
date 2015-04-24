@@ -44,10 +44,11 @@
 	</ul>
 	</nav>
 	<br>
+	<center>
 	<div>
 		<input type="text" id="time" readonly="true">
 	</div>
 	<br>
-	<a class="btn btn-info" href="nextQuestion">Go to Next Question</a>
+	<a class="btn btn-info" href="nextQuestion">Go to Next Question</a></center>
 </body>
 </html>

@@ -7,7 +7,10 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.exammodule.dao.UserDAO;
+import org.exammodule.dto.UserDTO;
 import org.exammodule.exception.StudentNotFoundException;
+import org.exammodule.form.AddStudentFormBean;
+import org.exammodule.handler.HashCode;
 import org.exammodule.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -75,6 +78,7 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService,CustomUs
 
 		return Result;
 	}
+	
 
 	@Transactional
 	@Override

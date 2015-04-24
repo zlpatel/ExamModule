@@ -40,19 +40,34 @@
 	</ul>
 	</nav>
 	<br>
-	<h2> Please read the below instructions before you start the test:</h2>
-	<h3>
-	&nbsp;&nbsp;- Once started, the test could not be restarted. So please make sure you complete the test once you start.<br>
-	&nbsp;&nbsp;- The test duration is 2 hours, you will be able to see the remaining time.<br>
-	&nbsp;&nbsp;- During the test you will face questions with five options.<br>
-	&nbsp;&nbsp;- Please select the most suitable option from the drop-down list as answer and hit submit.<br>
-	&nbsp;&nbsp;- You can not go back to a previous question once you have submitted the answer for that question. <br>
-	&nbsp;&nbsp;- You will be logged out if you stay inactive for more than 5 minutes.<br>
-	&nbsp;&nbsp;- Please logout once you complete the test.<br>
-	&nbsp;&nbsp;- You will not be allowed to login again once you complete the test.<br>
-	&nbsp;&nbsp;- If you face any trouble, please inform the test administrator.<br>
-	</h3><br>
+	<c:choose>
+		<c:when test="${ACCOUNT_BLOCKED}">
+			<a class="btn btn-info" href="question">Continue Test</a>
+		</c:when>
+		<c:otherwise>
+			<h2>Please read the below instructions before you start the
+				test:</h2>
+			<h3>
+				&nbsp;&nbsp;- Once started, the test could not be restarted. So
+				please make sure you complete the test once you start.<br>
+				&nbsp;&nbsp;- The test duration is 2 hours, you will be able to see
+				the remaining time.<br> &nbsp;&nbsp;- During the test you will
+				face questions with five options.<br> &nbsp;&nbsp;- Please
+				select the most suitable option from the drop-down list as answer
+				and hit submit.<br> &nbsp;&nbsp;- You can not go back to a
+				previous question once you have submitted the answer for that
+				question. <br> &nbsp;&nbsp;- You will be logged out if you stay
+				inactive for more than 5 minutes.<br> &nbsp;&nbsp;- Please
+				logout once you complete the test.<br> &nbsp;&nbsp;- You will
+				not be allowed to login again once you complete the test.<br>
+				&nbsp;&nbsp;- If you face any trouble, please inform the test
+				administrator.<br>
+			</h3>
+			<br>
 	&nbsp;&nbsp;<a class="btn btn-info" href="test">Begin Test</a>
+
+		</c:otherwise>
+	</c:choose>
 
 	<c:url value="/j_spring_security_logout" var="logoutUrl" />
 

@@ -33,7 +33,11 @@ public class UserDAOImpl implements UserDAO{
 			throw new StudentNotFoundException("Student not found!");
 		return user;
 	}
-
+	@Override
+	public boolean addStudent(UserDTO user) throws Exception{
+			sessionFactory.getCurrentSession().save(user);
+			return true;
+	}
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<UserDTO> getAllStudents() throws Exception{
