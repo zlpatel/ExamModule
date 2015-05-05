@@ -53,18 +53,21 @@ public class AdminController
 		return "resetaccountpage";
 	}
 
-	@RequestMapping(value = "/addStudent", method = RequestMethod.GET)
-	public String addStudentAccount() {
+	@RequestMapping(value = "/addUser", method = RequestMethod.GET)
+	public ModelAndView addStudentAccount() {
 		TreeMap<String,String> accessCategoryList=new TreeMap<String,String>();
 		accessCategoryList.put("Admin", "1");
 		accessCategoryList.put("Video", "2");
 		accessCategoryList.put("Image", "3");
 		accessCategoryList.put("Nothing", "4");
 		logger.debug("Received request to show add account page");
-		return "addaccountpage";
+		ModelAndView model=new ModelAndView("adduserpage");
+		model.addObject("categoryList",accessCategoryList);
+		return model;
+		
 	}
 
-	@RequestMapping(value = "/addStudent", method = RequestMethod.POST)
+	@RequestMapping(value = "/addUser", method = RequestMethod.POST)
 	public ModelAndView addStudentAccount(@ModelAttribute("command")AddStudentFormBean student,
 			HttpSession session) {
 		logger.debug("Received request to add account");

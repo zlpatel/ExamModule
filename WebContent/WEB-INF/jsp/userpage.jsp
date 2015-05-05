@@ -56,8 +56,8 @@
 				select the most suitable option from the drop-down list as answer
 				and hit submit.<br> &nbsp;&nbsp;- You can not go back to a
 				previous question once you have submitted the answer for that
-				question. <br> &nbsp;&nbsp;- You will be logged out if you stay
-				inactive for more than 5 minutes.<br> &nbsp;&nbsp;- Please
+				question. <br><font color="red"> &nbsp;&nbsp;- You will be logged out if you stay
+				inactive for more than 10 minutes.</font><br> &nbsp;&nbsp;- Please
 				logout once you complete the test.<br> &nbsp;&nbsp;- You will
 				not be allowed to login again once you complete the test.<br>
 				&nbsp;&nbsp;- If you face any trouble, please inform the test

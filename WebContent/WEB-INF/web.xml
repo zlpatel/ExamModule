@@ -47,7 +47,7 @@
 	</servlet-mapping>
 
 	<session-config>
-		<session-timeout>7</session-timeout>
+		<session-timeout>10</session-timeout>
 		<cookie-config>
 			<http-only>true</http-only>
 			<secure>true</secure>

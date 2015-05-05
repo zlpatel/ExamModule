@@ -48,6 +48,7 @@
 		<li><a href="home">Home</a></li>
 		<li><a href="studentsRecord">Students Record</a></li>
 		<li class="active"><a href="#">Reset Student Account</a></li>
+		<li><a href="addUser">Add User</a></li>
 		<li><a href="javascript:formSubmit()">Logout</a></li>
 	</ul>
 	</nav>
